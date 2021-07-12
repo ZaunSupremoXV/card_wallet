@@ -64,7 +64,9 @@ class _CardeDetailPageState extends State<CardeDetailPage> {
                     Text(
                       carde.description,
                       style: TextStyle(color: Colors.white70, fontSize: 18),
-                    )
+                    ),
+                    Text(carde.cardHolderName),
+                    Text(carde.cardNumber),
                   ],
                 ),
               ),

@@ -14,11 +14,6 @@ class CardeFields {
     time,
     cardHolderName,
     cardNumber,
-    company,
-    thruMonth,
-    thruYear,
-    fromMonth,
-    fromYear
   ];
 
   static final String id = '_id';
@@ -29,11 +24,6 @@ class CardeFields {
   static final String time = 'time';
   static final String cardHolderName = 'cardHolderName';
   static final String cardNumber = 'cardNumber';
-  static final String company = 'company';
-  static final String thruMonth = 'thruMonth';
-  static final String thruYear = 'thruYear';
-  static final String fromMonth = 'fromMonth';
-  static final String fromYear = 'fromYear';
 }
 
 class Carde {
@@ -45,11 +35,6 @@ class Carde {
   final DateTime createdTime;
   final String cardHolderName;
   final String cardNumber;
-  final String company;
-  final int thruMonth;
-  final int thruYear;
-  final int fromMonth;
-  final int fromYear;
 
   const Carde({
     this.id,
@@ -60,11 +45,6 @@ class Carde {
     required this.createdTime,
     required this.cardHolderName,
     required this.cardNumber,
-    required this.company,
-    required this.thruMonth,
-    required this.thruYear,
-    required this.fromMonth,
-    required this.fromYear,
   });
 
   Carde copy({
@@ -76,11 +56,6 @@ class Carde {
     DateTime? createdTime,
     String? cardHolderName,
     String? cardNumber,
-    String? company,
-    int? thruMonth,
-    int? thruYear,
-    int? fromMonth,
-    int? fromYear,
   }) =>
       Carde(
         id: id ?? this.id,
@@ -91,12 +66,6 @@ class Carde {
         createdTime: createdTime ?? this.createdTime,
         cardHolderName: cardHolderName ?? this.cardHolderName,
         cardNumber: cardNumber ?? this.cardNumber,
-        company: company ?? this.company,
-        //
-        thruMonth: thruMonth ?? this.thruMonth,
-        thruYear: thruYear ?? this.thruYear,
-        fromMonth: fromMonth ?? this.fromMonth,
-        fromYear: fromYear ?? this.fromYear,
       );
 
   static Carde fromJson(Map<String, Object?> json) => Carde(
@@ -108,11 +77,6 @@ class Carde {
         createdTime: DateTime.parse(json[CardeFields.time] as String),
         cardHolderName: json[CardeFields.cardHolderName] as String,
         cardNumber: json[CardeFields.cardNumber] as String,
-        company: json[CardeFields.company] as String,
-        thruMonth: json[CardeFields.thruMonth] as int,
-        thruYear: json[CardeFields.thruYear] as int,
-        fromMonth: json[CardeFields.fromMonth] as int,
-        fromYear: json[CardeFields.fromYear] as int,
       );
 
   Map<String, Object?> toJson() => {
@@ -124,10 +88,5 @@ class Carde {
         CardeFields.time: createdTime.toIso8601String(),
         CardeFields.cardHolderName: cardHolderName,
         CardeFields.cardNumber: cardNumber,
-        CardeFields.company: company,
-        CardeFields.thruMonth: thruMonth,
-        CardeFields.thruYear: thruYear,
-        CardeFields.fromMonth: fromMonth,
-        CardeFields.fromYear: fromYear,
       };
 }

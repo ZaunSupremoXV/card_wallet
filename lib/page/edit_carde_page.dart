@@ -1,8 +1,6 @@
 import 'package:card_wallet/db/card_database.dart';
 import 'package:card_wallet/model/card.dart';
 import 'package:card_wallet/shared/widget/carde_form_widget.dart';
-import 'package:credit_card_slider/card_network_type.dart';
-import 'package:credit_card_slider/credit_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddEditCardePage extends StatefulWidget {
@@ -24,11 +22,6 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
   late String description;
   late String cardHolderName;
   late String cardNumber;
-  late String company;
-  late int thruMonth;
-  late int thruYear;
-  late int fromMonth;
-  late int fromYear;
 
   @override
   void initState() {
@@ -40,11 +33,6 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
     description = widget.carde?.description ?? '';
     cardHolderName = widget.carde?.cardHolderName ?? '';
     cardNumber = widget.carde?.cardNumber ?? '';
-    company = widget.carde?.company ?? '';
-    thruMonth = widget.carde?.thruMonth ?? 0;
-    thruYear = widget.carde?.thruYear ?? 0;
-    fromMonth = widget.carde?.fromMonth ?? 0;
-    fromYear = widget.carde?.fromYear ?? 0;
   }
 
   @override
@@ -59,6 +47,8 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
             number: number,
             title: title,
             description: description,
+            cardHolderName: cardHolderName,
+            cardNumber: cardNumber,
             onChangedImportant: (isImportant) =>
                 setState(() => this.isImportant = isImportant),
             onChangedNumber: (number) => setState(() => this.number = number),
@@ -69,16 +59,6 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
                 setState(() => this.cardHolderName = cardHolderName),
             onChangedcardNumber: (cardNumber) =>
                 setState(() => this.cardNumber = cardNumber),
-            onChangedcompany: (company) =>
-                setState(() => this.company = company),
-            onChangedthruMonth: (thruMonth) =>
-                setState(() => this.thruMonth = thruMonth),
-            onChangedthruYear: (thruYear) =>
-                setState(() => this.thruYear = thruYear),
-            onChangedfromMonth: (fromMonth) =>
-                setState(() => this.fromMonth = fromMonth),
-            onChangedfromYear: (fromYear) =>
-                setState(() => this.fromYear = fromYear),
           ),
         ),
       );
@@ -135,11 +115,6 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
       createdTime: DateTime.now(),
       cardHolderName: cardHolderName,
       cardNumber: cardNumber,
-      company: company,
-      thruMonth: thruMonth,
-      thruYear: thruYear,
-      fromMonth: fromMonth,
-      fromYear: fromYear,
     );
 
     await CardesDatabase.instance.create(carde);

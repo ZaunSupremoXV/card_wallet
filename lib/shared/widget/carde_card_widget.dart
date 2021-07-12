@@ -1,4 +1,9 @@
 import 'package:card_wallet/model/card.dart';
+import 'package:credit_card_slider/card_background.dart';
+import 'package:credit_card_slider/card_company.dart';
+import 'package:credit_card_slider/card_network_type.dart';
+import 'package:credit_card_slider/credit_card_widget.dart';
+import 'package:credit_card_slider/validity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -28,31 +33,11 @@ class CardeCardWidget extends StatelessWidget {
     final time = DateFormat.yMMMd().format(carde.createdTime);
     final minHeight = getMinHeight(index);
 
-    return Card(
-      color: color,
-      child: Container(
-        constraints: BoxConstraints(minHeight: minHeight),
-        padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              time,
-              style: TextStyle(color: Colors.grey.shade700),
-            ),
-            SizedBox(height: 4),
-            Text(
-              carde.title,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return CreditCard(
+      cardBackground: SolidColorCardBackground(Colors.purple),
+      cardNetworkType: CardNetworkType.visaBasic,
+      cardHolderName: carde.cardHolderName,
+      cardNumber: carde.cardNumber,
     );
   }
 

@@ -70,26 +70,24 @@ class _CardesPageState extends State<CardesPage> {
         ),
       );
 
-  Widget buildCardes() => StaggeredGridView.countBuilder(
-        padding: EdgeInsets.all(8),
-        itemCount: cardes.length,
-        staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-        crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        itemBuilder: (context, index) {
-          final carde = cardes[index];
+  Widget buildCardes() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: cardes.length,
+          itemBuilder: (context, index) {
+            final carde = cardes[index];
 
-          return GestureDetector(
-            onTap: () async {
-              await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CardeDetailPage(cardeId: carde.id!),
-              ));
+            return GestureDetector(
+              onTap: () async {
+                await Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CardeDetailPage(cardeId: carde.id!),
+                ));
 
-              refreshCardes();
-            },
-            child: CardeCardWidget(carde: carde, index: index),
-          );
-        },
+                refreshCardes();
+              },
+              child: CardeCardWidget(carde: carde, index: index),
+            );
+          },
+        ),
       );
 }

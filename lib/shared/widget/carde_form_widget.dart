@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CardeFormWidget extends StatelessWidget {
   final bool? isImportant;
@@ -7,22 +8,13 @@ class CardeFormWidget extends StatelessWidget {
   final String? description;
   final String? cardHolderName;
   final String? cardNumber;
-  final String? company;
-  final int? thruMonth;
-  final int? thruYear;
-  final int? fromMonth;
-  final int? fromYear;
+
   final ValueChanged<bool> onChangedImportant;
   final ValueChanged<int> onChangedNumber;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
   final ValueChanged<String> onChangedcardHolderName;
   final ValueChanged<String> onChangedcardNumber;
-  final ValueChanged<String> onChangedcompany;
-  final ValueChanged<int> onChangedthruMonth;
-  final ValueChanged<int> onChangedthruYear;
-  final ValueChanged<int> onChangedfromMonth;
-  final ValueChanged<int> onChangedfromYear;
 
   const CardeFormWidget({
     Key? key,
@@ -35,27 +27,17 @@ class CardeFormWidget extends StatelessWidget {
     required this.onChangedTitle,
     this.cardHolderName,
     this.cardNumber,
-    this.company,
-    this.thruMonth = 0,
-    this.thruYear = 0,
-    this.fromMonth = 0,
-    this.fromYear = 0,
     required this.onChangedDescription,
     required this.onChangedcardHolderName,
     required this.onChangedcardNumber,
-    required this.onChangedcompany,
-    required this.onChangedthruMonth,
-    required this.onChangedthruYear,
-    required this.onChangedfromMonth,
-    required this.onChangedfromYear,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.only(top: 8),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 children: [
@@ -75,17 +57,15 @@ class CardeFormWidget extends StatelessWidget {
                 ],
               ),
               buildTitle(),
-              SizedBox(height: 8),
               buildDescription(),
-              SizedBox(height: 16),
+              buildcardHolderName(),
+              buildcardNumber(),
             ],
           ),
         ),
       );
 
   Widget buildTitle() => TextFormField(
-        maxLines: 1,
-        initialValue: title,
         style: TextStyle(
           color: Colors.white70,
           fontWeight: FontWeight.bold,
@@ -103,12 +83,10 @@ class CardeFormWidget extends StatelessWidget {
       );
 
   Widget buildDescription() => TextFormField(
-        maxLines: 5,
-        initialValue: description,
         style: TextStyle(color: Colors.white60, fontSize: 18),
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Type something...',
+          hintText: 'Descrição',
           hintStyle: TextStyle(color: Colors.white60),
         ),
         validator: (title) => title != null && title.isEmpty
@@ -118,12 +96,10 @@ class CardeFormWidget extends StatelessWidget {
       );
 
   Widget buildcardHolderName() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
         style: TextStyle(color: Colors.white60, fontSize: 18),
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Type something...',
+          hintText: 'Dono do cartão',
           hintStyle: TextStyle(color: Colors.white60),
         ),
         validator: (title) => title != null && title.isEmpty
@@ -133,92 +109,15 @@ class CardeFormWidget extends StatelessWidget {
       );
 
   Widget buildcardNumber() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
         style: TextStyle(color: Colors.white60, fontSize: 18),
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Type something...',
+          hintText: 'Número do cartão',
           hintStyle: TextStyle(color: Colors.white60),
         ),
         validator: (title) => title != null && title.isEmpty
             ? 'O número do cartão não pode estar vazio'
             : null,
         onChanged: onChangedcardNumber,
-      );
-
-  Widget buildcompany() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
-        style: TextStyle(color: Colors.white60, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'A companhia não pode estar vazio'
-            : null,
-        onChanged: onChangedcompany,
-      );
-
-  Widget buildthruMonth() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
-        style: TextStyle(color: Colors.white60, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'O mês de não pode estar vazio'
-            : null,
-        onChanged: (thruMonth) => onChangedthruMonth,
-      );
-
-  Widget buildthruYear() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
-        style: TextStyle(color: Colors.white60, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'O ano de não pode estar vazio'
-            : null,
-        onChanged: (thruYear) => onChangedthruYear,
-      );
-
-  Widget buildfromMonth() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
-        style: TextStyle(color: Colors.white60, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'O mês ate não pode estar vazio'
-            : null,
-        onChanged: (fromMonth) => onChangedfromMonth,
-      );
-
-  Widget buildfromYear() => TextFormField(
-        maxLines: 5,
-        initialValue: "-",
-        style: TextStyle(color: Colors.white60, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'O ano ate não pode estar vazio'
-            : null,
-        onChanged: (fromYear) => onChangedfromYear,
       );
 }
