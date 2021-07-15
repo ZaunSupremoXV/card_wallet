@@ -27,18 +27,19 @@ class CardesDatabase {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT NOT NULL';
     final boolType = 'BOOLEAN NOT NULL';
-    final integerType = 'INTEGER NOT NULL';
+    // final integerType = 'INTEGER NOT NULL';
 
     await db.execute('''
 CREATE TABLE $tableCardes ( 
   ${CardeFields.id} $idType, 
   ${CardeFields.isImportant} $boolType,
-  ${CardeFields.number} $integerType,
   ${CardeFields.title} $textType,
   ${CardeFields.description} $textType,
   ${CardeFields.time} $textType,
   ${CardeFields.cardHolderName} $textType,
-  ${CardeFields.cardNumber} $textType
+  ${CardeFields.cardNumber} $textType,
+  ${CardeFields.cardVencimento} $textType,
+  ${CardeFields.cardCvv} $textType
   )
 ''');
   }

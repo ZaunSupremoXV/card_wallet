@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:card_wallet/db/card_database.dart';
 import 'package:card_wallet/model/card.dart';
 import 'package:card_wallet/page/edit_carde_page.dart';
 import 'package:card_wallet/shared/widget/carde_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'carde_detail_page.dart';
 
 class CardesPage extends StatefulWidget {
@@ -43,9 +40,9 @@ class _CardesPageState extends State<CardesPage> {
         appBar: AppBar(
           title: Text(
             'Cartões',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24, color: Colors.white),
           ),
-          actions: [Icon(Icons.search), SizedBox(width: 12)],
+          // actions: [Icon(Icons.search), SizedBox(width: 12)],
         ),
         body: Center(
           child: isLoading
@@ -58,8 +55,11 @@ class _CardesPageState extends State<CardesPage> {
                   : buildCardes(),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add),
+          backgroundColor: Colors.yellowAccent,
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
           onPressed: () async {
             await Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => AddEditCardePage()),

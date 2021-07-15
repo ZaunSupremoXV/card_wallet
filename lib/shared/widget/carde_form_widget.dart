@@ -1,35 +1,40 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CardeFormWidget extends StatelessWidget {
   final bool? isImportant;
-  final int? number;
   final String? title;
   final String? description;
   final String? cardHolderName;
   final String? cardNumber;
+  final String? cardVencimento;
+  final String? cardCvv;
 
   final ValueChanged<bool> onChangedImportant;
-  final ValueChanged<int> onChangedNumber;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
   final ValueChanged<String> onChangedcardHolderName;
   final ValueChanged<String> onChangedcardNumber;
+  final ValueChanged<String> onChangedcardVencimento;
+  final ValueChanged<String> onChangedcardCvv;
 
   const CardeFormWidget({
     Key? key,
     this.isImportant = false,
-    this.number = 0,
     this.title = '',
     this.description = '',
     required this.onChangedImportant,
-    required this.onChangedNumber,
     required this.onChangedTitle,
     this.cardHolderName,
     this.cardNumber,
+    this.cardVencimento,
+    this.cardCvv,
     required this.onChangedDescription,
     required this.onChangedcardHolderName,
     required this.onChangedcardNumber,
+    required this.onChangedcardVencimento,
+    required this.onChangedcardCvv,
   }) : super(key: key);
 
   @override
@@ -41,82 +46,205 @@ class CardeFormWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  Text(
+                    "É importante? ",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  SizedBox(width: 10),
                   Switch(
                     value: isImportant ?? false,
                     onChanged: onChangedImportant,
+                    activeColor: Colors.yellowAccent,
                   ),
-                  Expanded(
-                    child: Slider(
-                      value: (number ?? 0).toDouble(),
-                      min: 0,
-                      max: 5,
-                      divisions: 5,
-                      onChanged: (number) => onChangedNumber(number.toInt()),
-                    ),
-                  )
                 ],
               ),
+              SizedBox(height: 10),
               buildTitle(),
+              SizedBox(height: 30),
               buildDescription(),
+              SizedBox(height: 30),
               buildcardHolderName(),
+              SizedBox(height: 30),
               buildcardNumber(),
+              SizedBox(height: 10),
+              buildcardVencimento(),
+              SizedBox(height: 10),
+              buildcardCvv(),
+              SizedBox(height: 10),
             ],
           ),
         ),
       );
 
   Widget buildTitle() => TextFormField(
-        style: TextStyle(
-          color: Colors.white70,
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-        ),
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Title',
-          hintStyle: TextStyle(color: Colors.white70),
+          labelText: "Título do cartão",
+          labelStyle: TextStyle(
+            color: Colors.white,
+          ),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
         ),
         validator: (title) => title != null && title.isEmpty
-            ? 'O título não pode estar vazio'
+            ? 'O título do cartão não pode estar vazio!'
             : null,
         onChanged: onChangedTitle,
       );
 
   Widget buildDescription() => TextFormField(
-        style: TextStyle(color: Colors.white60, fontSize: 18),
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Descrição',
-          hintStyle: TextStyle(color: Colors.white60),
+          labelText: "Descrição do cartão",
+          labelStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
         ),
         validator: (title) => title != null && title.isEmpty
-            ? 'A descrição não pode estar vazio'
+            ? 'A descrição do cartão não pode estar vazio!'
             : null,
         onChanged: onChangedDescription,
       );
 
   Widget buildcardHolderName() => TextFormField(
-        style: TextStyle(color: Colors.white60, fontSize: 18),
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Dono do cartão',
-          hintStyle: TextStyle(color: Colors.white60),
+          labelText: "Dono do cartão",
+          labelStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
         ),
         validator: (title) => title != null && title.isEmpty
-            ? 'O dono não pode estar vazio'
+            ? 'O dono do cartão não pode estar vazio!'
             : null,
         onChanged: onChangedcardHolderName,
       );
 
-  Widget buildcardNumber() => TextFormField(
-        style: TextStyle(color: Colors.white60, fontSize: 18),
+  Widget buildcardVencimento() => TextFormField(
+        inputFormatters: [TextInputMask(mask: '99/99')],
+        maxLength: 5,
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Número do cartão',
-          hintStyle: TextStyle(color: Colors.white60),
+          labelText: "Vencimento do cartão",
+          labelStyle: TextStyle(color: Colors.white),
+          counterStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
         ),
         validator: (title) => title != null && title.isEmpty
-            ? 'O número do cartão não pode estar vazio'
+            ? 'O vencimento do cartão não pode estar vazio!'
+            : null,
+        onChanged: onChangedcardVencimento,
+      );
+
+  Widget buildcardCvv() => TextFormField(
+        inputFormatters: [TextInputMask(mask: '999')],
+        maxLength: 3,
+        keyboardType: TextInputType.number,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: "CVV do cartão",
+          labelStyle: TextStyle(color: Colors.white),
+          counterStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
+        ),
+        validator: (title) => title != null && title.isEmpty
+            ? 'O CVV do cartão não pode estar vazio!'
+            : null,
+        onChanged: onChangedcardCvv,
+      );
+
+  Widget buildcardNumber() => TextFormField(
+        inputFormatters: [TextInputMask(mask: '9999 9999 9999 9999')],
+        maxLength: 19,
+        keyboardType: TextInputType.number,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: "Número do cartão",
+          labelStyle: TextStyle(color: Colors.white),
+          counterStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: Colors.yellowAccent,
+              width: 2.0,
+            ),
+          ),
+        ),
+        validator: (title) => title != null && title.isEmpty
+            ? 'O número do cartão não pode estar vazio!'
             : null,
         onChanged: onChangedcardNumber,
       );

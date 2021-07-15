@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 
 final _lightColors = [
   Colors.amber.shade300,
-  Colors.lightGreen.shade300,
   Colors.lightBlue.shade300,
   Colors.orange.shade300,
   Colors.pinkAccent.shade100,
@@ -33,11 +32,14 @@ class CardeCardWidget extends StatelessWidget {
     final time = DateFormat.yMMMd().format(carde.createdTime);
     final minHeight = getMinHeight(index);
 
-    return CreditCard(
-      cardBackground: SolidColorCardBackground(Colors.purple),
-      cardNetworkType: CardNetworkType.visaBasic,
-      cardHolderName: carde.cardHolderName,
-      cardNumber: carde.cardNumber,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: CreditCard(
+        cardBackground: SolidColorCardBackground(color),
+        cardNetworkType: CardNetworkType.visaBasic,
+        cardHolderName: carde.cardHolderName,
+        cardNumber: carde.cardNumber,
+      ),
     );
   }
 

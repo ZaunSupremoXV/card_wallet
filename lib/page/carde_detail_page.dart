@@ -47,33 +47,134 @@ class _CardeDetailPageState extends State<CardeDetailPage> {
                 child: ListView(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   children: [
-                    Text(
-                      carde.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                    Center(
+                      child: Text(
+                        carde.title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 50),
                     Text(
-                      DateFormat.yMMMd().format(carde.createdTime),
-                      style: TextStyle(color: Colors.white38),
+                      "Descrição",
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.yellowAccent),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 8),
+                        child: Text(
+                          carde.description,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
                     Text(
-                      carde.description,
-                      style: TextStyle(color: Colors.white70, fontSize: 18),
+                      "Informações do Cartão",
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
-                    Text(carde.cardHolderName),
-                    Text(carde.cardNumber),
+                    SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.yellowAccent),
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text.rich(
+                              TextSpan(
+                                text: 'Dono do cartão ',
+                                style: TextStyle(color: Colors.white70),
+                                children: [
+                                  TextSpan(
+                                    text: carde.cardHolderName,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                text: 'N° cartão ',
+                                style: TextStyle(color: Colors.white70),
+                                children: [
+                                  TextSpan(
+                                    text: carde.cardNumber,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                text: 'CVV ',
+                                style: TextStyle(color: Colors.white70),
+                                children: [
+                                  TextSpan(
+                                    text: carde.cardCvv,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                text: 'Vence em ',
+                                style: TextStyle(color: Colors.white70),
+                                children: [
+                                  TextSpan(
+                                    text: carde.cardVencimento,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Text.rich(
+                        TextSpan(
+                          text: 'Última alteração em ',
+                          style: TextStyle(color: Colors.white),
+                          children: [
+                            TextSpan(
+                              text:
+                                  DateFormat.yMMMd().format(carde.createdTime),
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
       );
 
   Widget editButton() => IconButton(
-      icon: Icon(Icons.edit_outlined),
+      icon: Icon(Icons.edit_outlined, color: Colors.white),
       onPressed: () async {
         if (isLoading) return;
 
@@ -85,7 +186,7 @@ class _CardeDetailPageState extends State<CardeDetailPage> {
       });
 
   Widget deleteButton() => IconButton(
-        icon: Icon(Icons.delete),
+        icon: Icon(Icons.delete, color: Colors.white),
         onPressed: () async {
           await CardesDatabase.instance.delete(widget.cardeId);
 

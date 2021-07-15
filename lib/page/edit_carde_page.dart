@@ -17,22 +17,24 @@ class AddEditCardePage extends StatefulWidget {
 class _AddEditCardePageState extends State<AddEditCardePage> {
   final _formKey = GlobalKey<FormState>();
   late bool isImportant;
-  late int number;
   late String title;
   late String description;
   late String cardHolderName;
   late String cardNumber;
+  late String cardVencimento;
+  late String cardCvv;
 
   @override
   void initState() {
     super.initState();
 
     isImportant = widget.carde?.isImportant ?? false;
-    number = widget.carde?.number ?? 0;
     title = widget.carde?.title ?? '';
     description = widget.carde?.description ?? '';
     cardHolderName = widget.carde?.cardHolderName ?? '';
     cardNumber = widget.carde?.cardNumber ?? '';
+    cardVencimento = widget.carde?.cardVencimento ?? '';
+    cardCvv = widget.carde?.cardCvv ?? '';
   }
 
   @override
@@ -40,25 +42,31 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
         appBar: AppBar(
           actions: [buildButton()],
         ),
-        body: Form(
-          key: _formKey,
-          child: CardeFormWidget(
-            isImportant: isImportant,
-            number: number,
-            title: title,
-            description: description,
-            cardHolderName: cardHolderName,
-            cardNumber: cardNumber,
-            onChangedImportant: (isImportant) =>
-                setState(() => this.isImportant = isImportant),
-            onChangedNumber: (number) => setState(() => this.number = number),
-            onChangedTitle: (title) => setState(() => this.title = title),
-            onChangedDescription: (description) =>
-                setState(() => this.description = description),
-            onChangedcardHolderName: (cardHolderName) =>
-                setState(() => this.cardHolderName = cardHolderName),
-            onChangedcardNumber: (cardNumber) =>
-                setState(() => this.cardNumber = cardNumber),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Form(
+            key: _formKey,
+            child: CardeFormWidget(
+              isImportant: isImportant,
+              title: title,
+              description: description,
+              cardHolderName: cardHolderName,
+              cardNumber: cardNumber,
+              onChangedImportant: (isImportant) =>
+                  setState(() => this.isImportant = isImportant),
+              onChangedTitle: (title) => setState(() => this.title = title),
+              onChangedDescription: (description) =>
+                  setState(() => this.description = description),
+              onChangedcardHolderName: (cardHolderName) =>
+                  setState(() => this.cardHolderName = cardHolderName),
+              onChangedcardNumber: (cardNumber) =>
+                  setState(() => this.cardNumber = cardNumber),
+              //
+              onChangedcardVencimento: (cardVencimento) =>
+                  setState(() => this.cardVencimento = cardVencimento),
+              onChangedcardCvv: (cardCvv) =>
+                  setState(() => this.cardCvv = cardCvv),
+            ),
           ),
         ),
       );
@@ -70,8 +78,8 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-          primary: isFormValid ? null : Colors.grey.shade700,
+          onPrimary: Colors.black,
+          primary: isFormValid ? null : Colors.yellowAccent,
         ),
         onPressed: addOrUpdateCarde,
         child: Text('Save'),
@@ -98,9 +106,13 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
   Future updateCarde() async {
     final carde = widget.carde!.copy(
       isImportant: isImportant,
-      number: number,
       title: title,
       description: description,
+      createdTime: DateTime.now(),
+      cardHolderName: cardHolderName,
+      cardNumber: cardNumber,
+      cardVencimento: cardVencimento,
+      cardCvv: cardCvv,
     );
 
     await CardesDatabase.instance.update(carde);
@@ -110,11 +122,12 @@ class _AddEditCardePageState extends State<AddEditCardePage> {
     final carde = Carde(
       title: title,
       isImportant: true,
-      number: number,
       description: description,
       createdTime: DateTime.now(),
       cardHolderName: cardHolderName,
       cardNumber: cardNumber,
+      cardVencimento: cardVencimento,
+      cardCvv: cardCvv,
     );
 
     await CardesDatabase.instance.create(carde);
