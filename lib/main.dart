@@ -13,7 +13,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Cardes SQLite';
+  static final String title = 'Cartões';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.orange,
           // scaffoldBackgroundColor: Colors.blueGrey.shade900,
-          scaffoldBackgroundColor: Colors.lightGreen,
+          scaffoldBackgroundColor: Colors.lightGreen.shade300,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,
