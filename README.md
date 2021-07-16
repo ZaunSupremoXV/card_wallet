@@ -2,7 +2,9 @@
 
 <div id="inicio"></div>
 
-<img src="https://i.imgur.com/8Frqef7.png" alt="exemplo imagem" width="450"> <img src="https://i.imgur.com/GJfEYx6.gif" alt="exemplo imagem" width="450">
+<img src="https://i.imgur.com/KstmdT5.jpg" height="600em" /> <img src="https://i.imgur.com/U1TzFxo.jpg" height="600em"/>
+
+<img src="https://i.imgur.com/1BcZbxs.jpg" height="600em" /> <img src="https://i.imgur.com/Tk2oOCX.jpg" height="600em"/>
 
 > Esse projeto serve de exemplo de utilização do sqflite em apps desenvolvidos em Flutter. Tem a função de salvar seus cartões de banco, as informações são gravadas no dispositivo, nenhum dado salvo é enviado para algum Banco de Dados externo. 
 
