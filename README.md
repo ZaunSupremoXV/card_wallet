@@ -1,18 +1,20 @@
+## 📱 card_wallet
+
 <div id="inicio"></div>
 
 <img src="https://i.imgur.com/8Frqef7.png" alt="exemplo imagem" width="450"> <img src="https://i.imgur.com/GJfEYx6.gif" alt="exemplo imagem" width="450">
 
-> Esse projeto serve de exemplo como o Flutter é executado no Windows. Foi utilizado os packages bitsdojo_window, fl_chart e flutter_svg.
+> Esse projeto serve de exemplo de utilização do sqflite em apps desenvolvidos em Flutter. Tem a função de salvar seus cartões de banco, as informações são gravadas no dispositivo, nenhum dado salvo é enviado para algum Banco de Dados externo. 
 
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você instalou a versão mais recente de `flutter`
-* Você tem uma máquina `Windows`. O código não foi testado em `Linux` e `MacOS`.
+* Você tem uma máquina `Windows`, `Linux` ou `MacOS`.
 
-## 🚀 Instalando example_flutter_desktop
+## 🚀 Instalando card_wallet
 
-Para instalar o example_flutter_desktop, siga estas etapas:
+Para instalar o card_wallet, siga estas etapas:
 
 Linux e macOS:
 ```
@@ -24,12 +26,12 @@ Windows:
 flutter pub get
 ```
 
-## ☕ Usando example_flutter_desktop
+## ☕ Usando card_wallet
 
-Para usar example_flutter_desktop, siga estas etapas:
+Para usar card_wallet, siga estas etapas:
 
 ```
-flutter run -d windows
+flutter run
 ```
 
 
